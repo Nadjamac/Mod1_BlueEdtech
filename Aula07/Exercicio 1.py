@@ -1,6 +1,3 @@
-#Lista de Exercicios_Aula06
-
-#1
 def soma(x, y, z):
     return x + y + z
 
@@ -14,5 +11,4 @@ resultado = soma(numero1, numero2, numero3)
 
 print(f"O resultado da soma é: {resultado}")
 
-#comentario
-print("Obrigado")
+
