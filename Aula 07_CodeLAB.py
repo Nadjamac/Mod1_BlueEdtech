@@ -14,3 +14,4 @@ resultado = soma(numero1, numero2, numero3)
 
 print(f"O resultado da soma é: {resultado}")
 
+print("Obrigado")
