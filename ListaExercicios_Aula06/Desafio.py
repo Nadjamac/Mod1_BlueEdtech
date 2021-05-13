@@ -1,9 +1,12 @@
 def data_escrita(data):  
+#Dividindo a string para analisar mês, dia e ano
     dia = int(data[:2])
     mes = data[3:5]
     ano = int(data[6:])
+#Caso a pessoa coloque um mês acima de 13
     if mes > "12" or mes == "00":
         print("Data Inválida!")
+#Teste para os dias dos meses. Alguns tem que ter até 31 dias, outros até 30
     if mes == "01":
         if dia > 31:
             print ("Data Inválida!")
@@ -59,14 +62,16 @@ def data_escrita(data):
                 print("Data Inválida!")
         else:
                 print (f"{dia} de Novembro de {ano}.")
+#O mês de Fevereiro é especial pq depende se o ano é bissexto ou não.
+#O ano é bissexto quando é divisivel por 4 ou 400 mas não divisivel por 100
     elif mes == "02": 
-        if (ano % 4 == 0 or ano % 400 == 0) or ano % 400 == 0:
+        if (ano % 4 == 0 or ano % 100 != 0) or ano % 400 == 0:
             if dia > 29:
                 print("Data Inválida!")
             else:
                 print (f"{dia} de Fevereiro de {ano}.")
-        if (ano % 4 != 0 or ano % 400 == 0) or ano % 400 == 0:
-            if dia > 29:
+        else:
+            if dia > 28:
                 print("Data Inválida!")
             else:
                 print (f"{dia} de Fevereiro de {ano}.")
