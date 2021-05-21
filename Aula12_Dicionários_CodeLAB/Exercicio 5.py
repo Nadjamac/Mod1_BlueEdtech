@@ -23,16 +23,15 @@ while parada == "C":
         dicionario[nome] = [idade, aposentadoria, salario, contratacao]
     else:
         contratacao = ()
+        aposentadoria = ()
         dicionario[nome] = [idade, aposentadoria]
+    parada = input("Digite C para continuar incluindo nomes ou S para sair: ").upper()
+    if parada == "S":
+        print()
+        for i , j in dicionario.items():
+            print('O candidato', i, "tem", j[0], "anos e vai se aposentar com", j[1], 'anos.')    
 
-dicionario = dict(lista)
-print(lista)
-print(dicionario)
 
-if parada == "S":
-    print()
-    for i , j in dicionario.items():
-        print('O candidato', i, "tem", j[0], "anos e vai se aposentar com", j[1], 'anos.')
 
 
 
