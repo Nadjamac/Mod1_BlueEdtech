@@ -8,7 +8,7 @@ mulheres=[]
 while parada:
     nome = input("Digite o nome: ")
     sexo = input("Digite o sexo (F- Feminino / M - Masculino): ").lower()
-    if sexo != "f" or sexo != "m":
+    if sexo != "f" and sexo != "m":
         print("Sexo não encontrado")
         sexo = input("Digite o sexo (F- Feminino / M - Masculino): ").lower()
         if sexo == "f":
