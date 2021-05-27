@@ -12,21 +12,19 @@ class Evento:
         self.presente = 0
     
     def probabilidade(self):
-        self.numero = random.randint(1,5)
+        self.numero = random.randint(1,4) #excluí o evento em que ele não ganha ou perde dinheiro para facilitar a implementação do programa
         if self.numero == 1:
             print("Parabéns você ganhou na mega sena!!")
             premio = 1000000
             self.presente = premio
         elif self.numero == 2:
-            print("Putz, aquele salgado fez mal. Teve que voltar pra casa!")
-        elif self.numero == 3:
             print("Que sorte, você achou 50 reais!!")
             achado = 50
             self.presente = achado
-        elif self.numero == 4:
+        elif self.numero == 3:
             print("Os casos de violência aumentaram e você foi assaltado!!")
             self.presente = -50 
-        elif self.numero == 5:
+        elif self.numero == 4:
             print("Ja sabe da novidade? Devivo à sua alta produtividade a empresa resolveu te dar uma folga remunerada")
             self.presente = 100 
         
@@ -141,7 +139,8 @@ if(__name__ == "__main__"):
             print("-=-=-")
             evento_do_dia.probabilidade()   #Fazendo o evento aleatório acontecer   
             if evento_do_dia.numero == 1:
-                break
+                print("Você zerou o jogo!")
+                break  #no caso de ganhar na mega sena, o jogador zera o jogo e ele acaba
             recebido = personagem.salario
             print("-=-=-")
             if(not personagem.medicado):
@@ -157,7 +156,7 @@ if(__name__ == "__main__"):
                 print("Como você chegou atrasado, você produziu menos do que de costume.")
                 recebido *= 0.8 
             
-            recebido += evento_do_dia.presente 
+            recebido += evento_do_dia.presente #somando o dinheiro ganho ou perdido durante o evento aleatório
                          
             print("-=-=-")
             print("Você recebeu "+str(recebido)+" reais pelo seu trabalho hoje.")
@@ -165,7 +164,7 @@ if(__name__ == "__main__"):
 
         
             
-            personagem.dinheiro = recebido
+            personagem.dinheiro += recebido #se adiciona o recebido do dia ao dinheiro total do personagem
             personagem.dormir()
             relogio = Relogio()
             dia+=1
