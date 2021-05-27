@@ -5,15 +5,32 @@
 
 import random
 
+
 class Evento:
     def __init__(self):
         self.numero = 0
+        self.presente = 0
     
     def probabilidade(self):
-        proba = random.randint(1,5)
+        self.numero = random.randint(1,5)
+        if self.numero == 1:
+            print("Parabéns você ganhou na mega sena!!")
+            premio = 1000000
+            self.presente = premio
+        elif self.numero == 2:
+            print("Putz, aquele salgado fez mal. Teve que voltar pra casa!")
+        elif self.numero == 3:
+            print("Que sorte, você achou 50 reais!!")
+            achado = 50
+            self.presente = achado
+        elif self.numero == 4:
+            print("Os casos de violência aumentaram e você foi assaltado!!")
+            self.presente = -50 
+        elif self.numero == 5:
+            print("Ja sabe da novidade? Devivo à sua alta produtividade a empresa resolveu te dar uma folga remunerada")
+            self.presente = 100 
         
 
-    
 
         
 
@@ -60,104 +77,95 @@ if(__name__ == "__main__"):
     relogio = Relogio()
     personagem = Personagem()
     casa = Casa()
+    evento_do_dia = Evento()
     cafe_da_manha = False
-    turno = "dia"
     while True:
-        while turno == "dia":
-            print("---")
-            print("São "+str(relogio)+" do dia "+str(dia)+". Você tem que sair pro trabalho até às 07:00.")
-            print(personagem)
-            print("")
-            print("Ações:")
-            print("1 - Tomar banho e escovar os dentes")
-            print("2 - Fazer café da manhã")
-            print("3 - Pedir café da manhã")
-            print("4 - Tomar café da manhã")
-            print("5 - Tomar remédio")
-            print("6 - Comprar remédio")
-            print("7 - Ir trabalhar")
-            print("0 - Sair do jogo")
-            opcao = input("Escolha sua ação:")
-            if(opcao == "1"):
-                personagem.sujo = False
-                relogio.avancaTempo(20)
-            elif(opcao == "2"):
-                if(casa.comida > 0):
-                    casa.comida -= 1
-                    cafe_da_manha = True
-                else:
-                    print("Não há comida em casa.")
+        print("---")
+        print("São "+str(relogio)+" do dia "+str(dia)+". Você tem que sair pro trabalho até às 07:00.")
+        print(personagem)
+        print("")
+        print("Ações:")
+        print("1 - Tomar banho e escovar os dentes")
+        print("2 - Fazer café da manhã")
+        print("3 - Pedir café da manhã")
+        print("4 - Tomar café da manhã")
+        print("5 - Tomar remédio")
+        print("6 - Comprar remédio")
+        print("7 - Ir trabalhar")
+        print("0 - Sair do jogo")
+        opcao = input("Escolha sua ação:")
+        if(opcao == "1"):
+            personagem.sujo = False
+            relogio.avancaTempo(20)
+        elif(opcao == "2"):
+            if(casa.comida > 0):
+                casa.comida -= 1
+                cafe_da_manha = True
+            else:
+                print("Não há comida em casa.")
+            relogio.avancaTempo(15)
+        elif(opcao == "3"):
+            if(personagem.dinheiro >= 15):
+                personagem.dinheiro -= 15
+                cafe_da_manha = True
+            else:
+                print("O café da manhã custa 15 reais, você não tem dinheiro suficiente.")
+            relogio.avancaTempo(5)
+        elif(opcao == "4"):
+            if(cafe_da_manha):
+                personagem.fome = False
+                cafe_da_manha = False
                 relogio.avancaTempo(15)
-            elif(opcao == "3"):
-                if(personagem.dinheiro >= 15):
-                    personagem.dinheiro -= 15
-                    cafe_da_manha = True
-                else:
-                    print("O café da manhã custa 15 reais, você não tem dinheiro suficiente.")
+            else:
+                print("Não tem café da manhã na sua casa.")
                 relogio.avancaTempo(5)
-            elif(opcao == "4"):
-                if(cafe_da_manha):
-                    personagem.fome = False
-                    cafe_da_manha = False
-                    relogio.avancaTempo(15)
-                else:
-                    print("Não tem café da manhã na sua casa.")
-                    relogio.avancaTempo(5)
-            elif(opcao == "5"):
-                if(casa.remedios > 0):
-                    casa.remedios -= 1
-                    personagem.medicado = True
-                else:
-                    print("Não tem remédio na sua casa")
+        elif(opcao == "5"):
+            if(casa.remedios > 0):
+                casa.remedios -= 1
+                personagem.medicado = True
+            else:
+                print("Não tem remédio na sua casa")
+            relogio.avancaTempo(5)
+        elif(opcao == "6"):
+            if(personagem.dinheiro >= 20):
+                casa.remedios += 10
+                personagem.dinheiro -= 20
+                relogio.avancaTempo(10)
+            else:
+                print("A cartela com 10 remédios custa 20 reais, você não tem dinheiro suficiente.")
                 relogio.avancaTempo(5)
-            elif(opcao == "6"):
-                if(personagem.dinheiro >= 20):
-                    casa.remedios += 10
-                    personagem.dinheiro -= 20
-                    relogio.avancaTempo(10)
-                else:
-                    print("A cartela com 10 remédios custa 20 reais, você não tem dinheiro suficiente.")
-                    relogio.avancaTempo(5)
-            elif(opcao == "7"):
-                print("-=-=-")
-                print("Você foi trabalhar.")
-                print(personagem)
-                print("-=-=-")
-                recebido = personagem.salario
-                if(not personagem.medicado):
-                    print("Como você não tomou seu remédio, você ficou doente no caminho e não chegou no trabalho")
-                    recebido = 0
-                elif(personagem.sujo):
-                    print("Como você estava sujo, seus colegas reclamaram para seu chefe, e você levou uma advertência.")
-                    recebido *= 0.9
-                elif(personagem.fome):
-                    print("Como você estava com fome, você trabalhou metade do que consegue trabalhar.")
-                    recebido *= 0.5
-                elif(relogio.atrasado()):
-                    print("Como você chegou atrasado, você produziu menos do que de costume.")
-                    recebido *= 0.8           
-                #Chamar o método que sorteia um número
-                #if numero sorteado == "1":
-                #    print("Parabéns você ganhou na mega sena!!")
-                #    premio = 1000000
-                #    personagem.dinheiro += premio
-                #    break
-                #elif numero_sorteado == "2":
-                #    print("Putz, aquele salgado fez mal. Teve que voltar pra casa!")
-                #    recebido = 0
-                #elif numero_sorteado == "3":
-                #    print("Que sorte, você achou 50 reais!!")
-                #    achado = 50
-                #    personagem.dinheir += achado
-                #elif numero_sorteado == "4"        
-                print("Você recebeu "+str(recebido)+" reais pelo seu trabalho hoje.")
-                print("-=-=-")
-                turno == "noite"
-            while turno == "noite":
+        elif(opcao == "7"):
+            print("-=-=-")
+            print("Você foi trabalhar.")
+            print(personagem)
+            print("-=-=-")
+            evento_do_dia.probabilidade()   #Fazendo o evento aleatório acontecer   
+            if evento_do_dia.numero == 1:
+                break
+            recebido = personagem.salario
+            print("-=-=-")
+            if(not personagem.medicado):
+                print("Como você não tomou seu remédio, você ficou doente no caminho e não chegou no trabalho")
+                recebido = 0
+            elif(personagem.sujo):
+                print("Como você estava sujo, seus colegas reclamaram para seu chefe, e você levou uma advertência.")
+                recebido *= 0.9
+            elif(personagem.fome):
+                print("Como você estava com fome, você trabalhou metade do que consegue trabalhar.")
+                recebido *= 0.5
+            elif(relogio.atrasado()):
+                print("Como você chegou atrasado, você produziu menos do que de costume.")
+                recebido *= 0.8 
+            
+            recebido += evento_do_dia.presente 
+                         
+            print("-=-=-")
+            print("Você recebeu "+str(recebido)+" reais pelo seu trabalho hoje.")
+            print("-=-=-")
 
+        
             
-            
-            personagem.dinheiro += recebido
+            personagem.dinheiro = recebido
             personagem.dormir()
             relogio = Relogio()
             dia+=1
@@ -165,4 +173,4 @@ if(__name__ == "__main__"):
             break
         else:
             print("Opção inválida!")
-            relogio.avancaTempo(5)
+            Relogio.avancaTempo(5)
