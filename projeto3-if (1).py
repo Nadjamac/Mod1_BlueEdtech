@@ -1,54 +1,99 @@
 # Proposta de projeto de ficção interativa para avaliação de OO
 # Sugestão: completar com classes filhas colocando pessoas saudáveis, trabalhos menos remunerados, casas melhor equipadas et cetera
 #É possivel incluir uma classe para os eventos - sorteando 
-# Os eventos podem ter diferentes probabilidades  
+#       Os eventos podem ter diferentes probabilidades  
 
 import random
 
+class EventoSorte:
+    def _init_(self,premiacao):
+        self.premiacao = premiacao
+
+    def GanhaValor(self):
+        print("premiacao")
+        return (self.premiacao)
+
+class PremioTop(EventoSorte):
+    def _init_(self,megaSena,valor)
+        self.megaSena=megaSena
+        super()._int_(valor)
+
+    def GanhaValor(self):
+        print(self.megaSena * self.valor)
+        return(self.megaSena * self.valor)
+
+EventoSorte = EventoSorte
+EventoSorte.GanhaValor()
+PremioTop = PremioTop()
+PremioTop.GanhaValor(1.500.000,00)
+
+
+class EventoAzar:
+    def _init_(self,perdeu ):
+        self.perdeu = perdeu
+
+    def PerdeuValor(self):
+        print("Perdeu o Dinheiro")
+        return (self.PerdeuValor)
+
+class Azarrado(EventoAzar):
+    def _init_(self,Dinheiro,valor)
+        self.Dinheiro = Dinheiro
+        super()._int_(valor)
+
+    def PerdeuValor(self):
+        print(self.PerdeuValor * self.valor)
+        return(self.PerdeuValor * self.valor)
+
+EventoAzar = EventoAzar
+EventoAzar.PerdeuValor()
+Azarrado = Azarrado()
+Azarrado.PerdeuValor(100,00)
+
+
+
+
+
 class Evento:
-
-        def __init__(self):
-            self.numero = 0
-            self.presente = 0
+    def __init__(self):
+        self.numero = 0
+        self.presente = 0
     
-        def probabilidade(self):
-            self.numero = random.randint(1,5)
-
-            self.numero == 1
+    def probabilidade(self):
+        self.numero = random.randint(1,4) #excluí o evento em que ele não ganha ou perde dinheiro para facilitar a implementação do programa
+        if self.numero == 1:
+            print("Parabéns você ganhou na mega sena!!")
             premio = 1000000
             self.presente = premio
-
-            self.numero == 2
-            self.numero == 3
+        elif self.numero == 2:
+            print("Que sorte, você achou 50 reais!!")
             achado = 50
             self.presente = achado
-            self.numero == 4
+        elif self.numero == 3:
+            print("Os casos de violência aumentaram e você foi assaltado!!")
             self.presente = -50 
-            self.numero == 5
+        elif self.numero == 4:
+            print("Ja sabe da novidade? Devivo à sua alta produtividade a empresa resolveu te dar uma folga remunerada")
             self.presente = 100 
-            self.numero == 6
-      
-            
-
-        
+   
+   
 
 class Relogio:
-
-        def __init__(self):
-            self.horas = 6
-            self.minutos = 0
+    def __init__(self):
+        self.horas = 6
+        self.minutos = 0
     
-        def __str__(self):
-            return f"{self.horas:02d}:{self.minutos:02d}"
+    def __str__(self):
+        return f"{self.horas:02d}:{self.minutos:02d}"
     
-        def avancaTempo(self, minutos):
-            self.minutos += minutos
-            while(self.minutos >= 60):
-                self.minutos -= 60
-                self.horas += 1
+    def avancaTempo(self, minutos):
+        self.minutos += minutos
+        while(self.minutos >= 60):
+            self.minutos -= 60
+            self.horas += 1
     
-        def atrasado(self):
-            return (self.horas > 7 or (self.horas == 7 and self.minutos > 0))
+    def atrasado(self):
+        return (self.horas > 7 or (self.horas == 7 and self.minutos > 0))
 
 class Personagem:
     def __init__(self):
@@ -78,7 +123,6 @@ if(__name__ == "__main__"):
     casa = Casa()
     evento_do_dia = Evento()
     cafe_da_manha = False
-    
     while True:
         print("---")
         print("São "+str(relogio)+" do dia "+str(dia)+". Você tem que sair pro trabalho até às 07:00.")
@@ -108,9 +152,6 @@ if(__name__ == "__main__"):
             if(personagem.dinheiro >= 15):
                 personagem.dinheiro -= 15
                 cafe_da_manha = True
-                evento_do_dia.probabilidade()
-                evento_do_dia == 2
-                print("Putz, aquele salgado fez mal. Teve que voltar pra casa!")
             else:
                 print("O café da manhã custa 15 reais, você não tem dinheiro suficiente.")
             relogio.avancaTempo(5)
@@ -119,7 +160,6 @@ if(__name__ == "__main__"):
                 personagem.fome = False
                 cafe_da_manha = False
                 relogio.avancaTempo(15)
-                
             else:
                 print("Não tem café da manhã na sua casa.")
                 relogio.avancaTempo(5)
@@ -137,31 +177,17 @@ if(__name__ == "__main__"):
                 relogio.avancaTempo(10)
             else:
                 print("A cartela com 10 remédios custa 20 reais, você não tem dinheiro suficiente.")
-                relogio.avancaTempo()
-                evento_do_dia.probabilidade ()
-                evento_do_dia = 2 
-                print(int==3("Que sorte, você achou 50 reais!!"))
-
+                relogio.avancaTempo(5)
         elif(opcao == "7"):
             print("-=-=-")
             print("Você foi trabalhar.")
             print(personagem)
             print("-=-=-")
-            evento_do_dia.probabilidade()   #Fazendo o evento aleatório acontecer  
-            evento_do_dia == 4
-            print("Os casos de violência aumentaram e você foi assaltado!!") #incluindo o evento sair p trabalhar c assalto
-            recebido = 0
-            evento_do_dia.probabilidade()
-            evento_do_dia == 6
-            print("Você vai ficar sem remedio , sem tomar café e o dinheiro pra so da para  trabalhar no outro dia")
-            evento_do_dia.probabilidade()
-            evento_do_dia == 7
-            print(f"escolha uma opcao ? 1 para jogar na mega sena 1 ou 8 continuar tentando a vida ? ")
-            if evento_do_dia ==1:
-                print("Parabéns você ganhou na mega sena!!")
-            elif evento_do_dia == 3:
-                print("Que sorte você ganhou R$ 50,00 !!! ")
-           
+            evento_do_dia.probabilidade()   #Fazendo o evento aleatório acontecer   
+            if evento_do_dia.numero == 1:
+                print("Você zerou o jogo!")
+                break  #no caso de ganhar na mega sena, o jogador zera o jogo e ele acaba
+            recebido = personagem.salario
             print("-=-=-")
             if(not personagem.medicado):
                 print("Como você não tomou seu remédio, você ficou doente no caminho e não chegou no trabalho")
@@ -176,14 +202,15 @@ if(__name__ == "__main__"):
                 print("Como você chegou atrasado, você produziu menos do que de costume.")
                 recebido *= 0.8 
             
-            recebido += evento_do_dia.presente  
+            recebido += evento_do_dia.presente #somando o dinheiro ganho ou perdido durante o evento aleatório
                          
             print("-=-=-")
-            print("Você não recebeu "+str(recebido)+" reais por que não trabalhou hoje.")# alterado a frase do print para não receber
+            print("Você recebeu "+str(recebido)+" hoje.")
             print("-=-=-")
-       
+
+        
             
-            personagem.dinheiro = recebido
+            personagem.dinheiro += recebido #se adiciona o recebido do dia ao dinheiro total do personagem
             personagem.dormir()
             relogio = Relogio()
             dia+=1
@@ -192,4 +219,3 @@ if(__name__ == "__main__"):
         else:
             print("Opção inválida!")
             Relogio.avancaTempo(5)
-
