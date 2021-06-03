@@ -20,10 +20,7 @@ class EventoSorte(Evento):  #criando uma subclasse chamada "evento sorte" para o
             print("Que sorte, você achou 50 reais!!")
             achado = 50
             self.presente = achado
-        elif self.numero == 3:
-            print("Os casos de violência aumentaram e você foi assaltado!!")
-            self.presente = -50 
-            return self.presente
+       
 
 class EventoAzar(Evento):  #criando uma subclasse "evento Azar" para o evento em que ele perde dinheiro
     def __init__(self, numero):
